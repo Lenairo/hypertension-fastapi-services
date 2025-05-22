@@ -17,16 +17,6 @@ logger = logging.getLogger(__name__)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE_DIR, 'models')
 
-# Load models
-medication_model = joblib.load(os.path.join(MODEL_DIR, 'medication_model.pkl'))
-medication_encoder = joblib.load(os.path.join(MODEL_DIR, 'medication_encoder.pkl'))
-label_encoder = joblib.load(os.path.join(MODEL_DIR, 'label_encoder.pkl'))
-label_encoder_medication = joblib.load(os.path.join(MODEL_DIR, 'label_encoder_medication.pkl'))
-label_encoder_dose = joblib.load(os.path.join(MODEL_DIR, 'label_encoder_dose.pkl'))
-drug_class_model = joblib.load(os.path.join(MODEL_DIR, 'drug_class_model.pkl'))
-dose_model = joblib.load(os.path.join(MODEL_DIR, 'dose_model.pkl'))
-scaler = joblib.load(os.path.join(MODEL_DIR, 'scaler.pkl'))
-
 dose_ranges = {
     'amlodipine': (5, 10),
     'telmisartan': (40, 80),
@@ -50,14 +40,14 @@ def map_dose(medication, category):
     return 0
 
 # Load models and encoders
-model_dose = joblib.load(f"{MODEL_DIR}dose_model.pkl")
-model_drug_class = joblib.load(f"{MODEL_DIR}drug_class_model.pkl")
-model_medication = joblib.load(f"{MODEL_DIR}medication_model.pkl")
-scaler = joblib.load(f"{MODEL_DIR}scaler.pkl")
-medication_encoder = joblib.load(f"{MODEL_DIR}medication_encoder.pkl")
-label_encoder_dose = joblib.load(f"{MODEL_DIR}label_encoder_dose.pkl")
-label_encoder = joblib.load(f"{MODEL_DIR}label_encoder.pkl")
-label_encoder_medication = joblib.load(f"{MODEL_DIR}label_encoder_medication.pkl")
+medication_model = joblib.load(os.path.join(MODEL_DIR, 'medication_model.pkl'))
+medication_encoder = joblib.load(os.path.join(MODEL_DIR, 'medication_encoder.pkl'))
+label_encoder = joblib.load(os.path.join(MODEL_DIR, 'label_encoder.pkl'))
+label_encoder_medication = joblib.load(os.path.join(MODEL_DIR, 'label_encoder_medication.pkl'))
+label_encoder_dose = joblib.load(os.path.join(MODEL_DIR, 'label_encoder_dose.pkl'))
+drug_class_model = joblib.load(os.path.join(MODEL_DIR, 'drug_class_model.pkl'))
+dose_model = joblib.load(os.path.join(MODEL_DIR, 'dose_model.pkl'))
+scaler = joblib.load(os.path.join(MODEL_DIR, 'scaler.pkl'))
 
 class InputData(BaseModel):
     Age: float
