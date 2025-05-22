@@ -7,13 +7,25 @@ import logging
 import mysql.connector
 from mysql.connector import Error
 from typing import Optional
+import os
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Define the directory where models are saved
-MODEL_DIR = "/Users/macuser/Documents/Hypertension_Project/models/"
+# Define the directory where models are saved (relative to this script)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(BASE_DIR, 'models')
+
+# Load models
+medication_model = joblib.load(os.path.join(MODEL_DIR, 'medication_model.pkl'))
+medication_encoder = joblib.load(os.path.join(MODEL_DIR, 'medication_encoder.pkl'))
+label_encoder = joblib.load(os.path.join(MODEL_DIR, 'label_encoder.pkl'))
+label_encoder_medication = joblib.load(os.path.join(MODEL_DIR, 'label_encoder_medication.pkl'))
+label_encoder_dose = joblib.load(os.path.join(MODEL_DIR, 'label_encoder_dose.pkl'))
+drug_class_model = joblib.load(os.path.join(MODEL_DIR, 'drug_class_model.pkl'))
+dose_model = joblib.load(os.path.join(MODEL_DIR, 'dose_model.pkl'))
+scaler = joblib.load(os.path.join(MODEL_DIR, 'scaler.pkl'))
 
 dose_ranges = {
     'amlodipine': (5, 10),
