@@ -7,11 +7,15 @@ import logging
 import mysql.connector
 from mysql.connector import Error
 from typing import Optional
+from dotenv import load_dotenv
 import os
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Load environment variables FIRST
+load_dotenv("/etc/secrets/db.env")
 
 # Define the directory where models are saved (relative to this script)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -86,10 +90,11 @@ async def predict(data: InputData):
     # Initialize fresh database connection for each request
     try:
         db_connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="principal",
-            database="hypertension"
+            host=os.getenv("DB_HOST"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            database=os.getenv("DB_NAME"),
+            port=int(os.getenv("DB_PORT", 3306))  # fallback to 3306 if not set          
         )
         cursor = db_connection.cursor()
     except Error as db_conn_error:
