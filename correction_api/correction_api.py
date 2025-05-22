@@ -4,18 +4,24 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import mysql.connector
 from typing import List, Optional
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from secret mount path
+load_dotenv("/etc/secrets/db.env")
 
 app = FastAPI()
 @app.get("/")
 async def root():
     return {"message": "Correction API is running"}
 
-# Initialize MySQL connection
+# Initialize MySQL connection using environment variables
 db_connection = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="principal",
-    database="hypertension"
+    host=os.getenv("DB_HOST"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
+    port=int(os.getenv("DB_PORT", 3306))  # Default to 3306 if not provided
 )
 
 # Define models for both single and combo corrections
