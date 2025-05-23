@@ -45,12 +45,12 @@ def map_dose(medication, category):
     return 0
 
 # Load models and encoders
-medication_model = joblib.load(os.path.join(MODEL_DIR, 'medication_model.pkl'))
+model_medication = joblib.load(os.path.join(MODEL_DIR, 'medication_model.pkl'))
 medication_encoder = joblib.load(os.path.join(MODEL_DIR, 'medication_encoder.pkl'))
 label_encoder = joblib.load(os.path.join(MODEL_DIR, 'label_encoder.pkl'))
 label_encoder_medication = joblib.load(os.path.join(MODEL_DIR, 'label_encoder_medication.pkl'))
 label_encoder_dose = joblib.load(os.path.join(MODEL_DIR, 'label_encoder_dose.pkl'))
-drug_class_model = joblib.load(os.path.join(MODEL_DIR, 'drug_class_model.pkl'))
+model_drug_class = joblib.load(os.path.join(MODEL_DIR, 'drug_class_model.pkl'))
 model_dose = joblib.load(os.path.join(MODEL_DIR, 'dose_model.pkl'))
 scaler = joblib.load(os.path.join(MODEL_DIR, 'scaler.pkl'))
 
