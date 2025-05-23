@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import numpy as np
@@ -69,6 +70,23 @@ class InputData(BaseModel):
     submitted_by_token: Optional[str] = None
 
 app = FastAPI()
+
+# Define allowed origins for CORS (Render and local development)
+origins = [
+    "https://hypertension-form.onrender.com",
+    "http://localhost",
+    "http://localhost:3000",
+    "http://127.0.0.1:5000"
+]
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():

@@ -1,6 +1,7 @@
  ####Correction_api with single and combo_prescriptions
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import mysql.connector
 from typing import List, Optional
@@ -11,6 +12,24 @@ import os
 load_dotenv("/etc/secrets/db.env")
 
 app = FastAPI()
+
+# Define allowed origins for CORS (Render and local development)
+origins = [
+    "https://hypertension-form.onrender.com",
+    "http://localhost",
+    "http://localhost:3000",
+    "http://127.0.0.1:5000"
+]
+
+# Enable CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.get("/")
 async def root():
     return {"message": "Correction API is running"}
