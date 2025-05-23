@@ -51,7 +51,7 @@ label_encoder = joblib.load(os.path.join(MODEL_DIR, 'label_encoder.pkl'))
 label_encoder_medication = joblib.load(os.path.join(MODEL_DIR, 'label_encoder_medication.pkl'))
 label_encoder_dose = joblib.load(os.path.join(MODEL_DIR, 'label_encoder_dose.pkl'))
 drug_class_model = joblib.load(os.path.join(MODEL_DIR, 'drug_class_model.pkl'))
-dose_model = joblib.load(os.path.join(MODEL_DIR, 'dose_model.pkl'))
+model_dose = joblib.load(os.path.join(MODEL_DIR, 'dose_model.pkl'))
 scaler = joblib.load(os.path.join(MODEL_DIR, 'scaler.pkl'))
 
 class InputData(BaseModel):
